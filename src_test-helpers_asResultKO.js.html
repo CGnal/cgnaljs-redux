@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>src/test-helpers/asResultKO.js - @cgnal/redux</title>
+    
+    <meta name="description" content="Common utilities for CGnal's Redux based applications" />
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a class="menu-item" href="https://github.com/CGnal/cgnaljs-redux" target="_blank" >Github repository</a></h2><h3>Modules</h3><ul><li><a href="module-@cgnal_redux_actions.html">@cgnal/redux/actions</a><ul class='methods'><li data-type='method'><a href="module-@cgnal_redux_actions.html#.createActionWithSource">createActionWithSource</a></li><li data-type='method'><a href="module-@cgnal_redux_actions.html#.createEmptyAction">createEmptyAction</a></li><li data-type='method'><a href="module-@cgnal_redux_actions.html#.createHttpFailureAction">createHttpFailureAction</a></li><li data-type='method'><a href="module-@cgnal_redux_actions.html#.createHttpSuccessAction">createHttpSuccessAction</a></li><li data-type='method'><a href="module-@cgnal_redux_actions.html#.getPayloadAsArray">getPayloadAsArray</a></li><li data-type='method'><a href="module-@cgnal_redux_actions.html#.isHttpUnauthorizedAction">isHttpUnauthorizedAction</a></li></ul></li><li><a href="module-@cgnal_redux_reducers.html">@cgnal/redux/reducers</a><ul class='methods'><li data-type='method'><a href="module-@cgnal_redux_reducers.html#.combine">combine</a></li><li data-type='method'><a href="module-@cgnal_redux_reducers.html#.handleHttpFailure">handleHttpFailure</a></li><li data-type='method'><a href="module-@cgnal_redux_reducers.html#.handleHttpStart">handleHttpStart</a></li><li data-type='method'><a href="module-@cgnal_redux_reducers.html#.handleHttpSuccess">handleHttpSuccess</a></li><li data-type='method'><a href="module-@cgnal_redux_reducers.html#.putPayloadInKey">putPayloadInKey</a></li><li data-type='method'><a href="module-@cgnal_redux_reducers.html#.putPayloadInPath">putPayloadInPath</a></li></ul></li><li><a href="module-@cgnal_redux_saga.html">@cgnal/redux/saga</a><ul class='methods'><li data-type='method'><a href="module-@cgnal_redux_saga.html#.resultHandler">resultHandler</a></li><li data-type='method'><a href="module-@cgnal_redux_saga.html#.sagaPromiseTransformer">sagaPromiseTransformer</a></li><li data-type='method'><a href="module-@cgnal_redux_saga.html#.toCallEffect">toCallEffect</a></li></ul></li><li><a href="module-@cgnal_redux_selectors.html">@cgnal/redux/selectors</a><ul class='methods'><li data-type='method'><a href="module-@cgnal_redux_selectors.html#.makeMapStateToProps">makeMapStateToProps</a></li></ul></li><li><a href="module-@cgnal_redux_test-helpers.html">@cgnal/redux/test-helpers</a><ul class='methods'><li data-type='method'><a href="module-@cgnal_redux_test-helpers.html#.asHttpFailure">asHttpFailure</a></li><li data-type='method'><a href="module-@cgnal_redux_test-helpers.html#.asHttpSuccess">asHttpSuccess</a></li><li data-type='method'><a href="module-@cgnal_redux_test-helpers.html#.asResponse">asResponse</a></li><li data-type='method'><a href="module-@cgnal_redux_test-helpers.html#.asResultKO">asResultKO</a></li><li data-type='method'><a href="module-@cgnal_redux_test-helpers.html#.asResultOK">asResultOK</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#Action">Action</a></li><li><a href="global.html#arguments">arguments</a></li><li><a href="global.html#Array">Array</a></li><li><a href="global.html#ArrayLike">ArrayLike</a></li><li><a href="global.html#Boolean">Boolean</a></li><li><a href="global.html#Date">Date</a></li><li><a href="global.html#function">function</a></li><li><a href="global.html#Generator">Generator</a></li><li><a href="global.html#GeneratorFunction">GeneratorFunction</a></li><li><a href="global.html#Number">Number</a></li><li><a href="global.html#Object">Object</a></li><li><a href="global.html#Promise">Promise</a></li><li><a href="global.html#RegExp">RegExp</a></li><li><a href="global.html#String">String</a></li><li><a href="global.html#Undefined">Undefined</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">src/test-helpers/asResultKO.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { putInKey } from "@cgnal/utils/object";
+
+/**
+ * Test helper to build a failure result.
+ * Any value passed to the function will be put in
+ * the "error" property of an object.
+ * @memberof module:@cgnal/redux/test-helpers
+ * @since 0.0.18
+ * @function
+ * @param {*} value
+ * @returns {Object}
+ */
+const asResultKO = putInKey("error");
+
+export default asResultKO;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Thu Dec 02 2021 14:05:39 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+    <link type="text/css" rel="stylesheet" href="styles/template-cgnal.css">
+    
+    <link type="text/css" rel="stylesheet" href="styles/prettify-cgnal.css">
+    
+</body>
+</html>
