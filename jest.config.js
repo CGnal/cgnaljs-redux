@@ -11,7 +11,9 @@ module.exports = {
             statements: 100
         }
     },
-    resolver: "jest-node-exports-resolver",
+    moduleNameMapper: {
+        "@cgnal/([^/]+)/(.+)": "<rootDir>/node_modules/@cgnal/$1/src/$2"
+    },
     rootDir: ".",
     testEnvironment: "node",
     testRegex: "(/__tests__/.+\\.(test|spec))\\.js$",
