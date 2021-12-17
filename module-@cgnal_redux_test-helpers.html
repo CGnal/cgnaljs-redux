@@ -179,7 +179,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_test-helpers_asHttpFailure.js.html">src/test-helpers/asHttpFailure.js</a>, <a href="src_test-helpers_asHttpFailure.js.html#line17">line 17</a>
+        <a href="src_test-helpers_asHttpFailure.js.html">src/test-helpers/asHttpFailure.js</a>, <a href="src_test-helpers_asHttpFailure.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -234,6 +234,20 @@ message and augmented with the optional &quot;extras&quot; properties.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const extras = { status: 401 };
+
+asHttpFailure("some error message", extras) // =>
+// {
+//     error: Error {
+//         // ...
+//         message: "some error message",
+//         status: 401
+//     }
+// }</code></pre>
 
 
 
@@ -394,7 +408,7 @@ message and augmented with the optional &quot;extras&quot; properties.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_test-helpers_asHttpSuccess.js.html">src/test-helpers/asHttpSuccess.js</a>, <a href="src_test-helpers_asHttpSuccess.js.html#line18">line 18</a>
+        <a href="src_test-helpers_asHttpSuccess.js.html">src/test-helpers/asHttpSuccess.js</a>, <a href="src_test-helpers_asHttpSuccess.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -451,6 +465,24 @@ and augmented with the optional &quot;extras&quot; properties.</p>
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const extras = {
+    headers: { "Content-Type": "application/json" },
+    status: 200
+};
+const body = [1, 2, 3];
+
+asHttpSuccess(body, extras) // =>
+// {
+//     success: {
+//         "Content-Type": "application/json"
+//         "body": [1, 2, 3],
+//         "status": 200
+//     }
+// }</code></pre>
+
+
 
 
     <h5>Parameters:</h5>
@@ -488,7 +520,7 @@ and augmented with the optional &quot;extras&quot; properties.</p>
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">Any</span>
 
 
             
@@ -609,7 +641,7 @@ and augmented with the optional &quot;extras&quot; properties.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_test-helpers_asResponse.js.html">src/test-helpers/asResponse.js</a>, <a href="src_test-helpers_asResponse.js.html#line10">line 10</a>
+        <a href="src_test-helpers_asResponse.js.html">src/test-helpers/asResponse.js</a>, <a href="src_test-helpers_asResponse.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -663,6 +695,22 @@ and augmented with the optional &quot;extras&quot; properties.</p>
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const extras = {
+    headers: { "Content-Type": "application/json" },
+    status: 200
+};
+const body = [1, 2, 3];
+
+asResponse(body, extras) // =>
+// {
+//     "Content-Type": "application/json"
+//     "body": [1, 2, 3],
+//     "status": 200
+// }</code></pre>
+
+
 
 
     <h5>Parameters:</h5>
@@ -700,7 +748,7 @@ and augmented with the optional &quot;extras&quot; properties.</p>
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">Any</span>
 
 
             
@@ -821,7 +869,7 @@ and augmented with the optional &quot;extras&quot; properties.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_test-helpers_asResultKO.js.html">src/test-helpers/asResultKO.js</a>, <a href="src_test-helpers_asResultKO.js.html#line13">line 13</a>
+        <a href="src_test-helpers_asResultKO.js.html">src/test-helpers/asResultKO.js</a>, <a href="src_test-helpers_asResultKO.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -877,6 +925,11 @@ the &quot;error&quot; property of an object.</p>
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>asResultKO({ status: 500 }) // => { error: { status: 500 } }</code></pre>
+
+
 
 
     <h5>Parameters:</h5>
@@ -910,7 +963,7 @@ the &quot;error&quot; property of an object.</p>
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">Any</span>
 
 
             
@@ -980,7 +1033,7 @@ the &quot;error&quot; property of an object.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_test-helpers_asResultOK.js.html">src/test-helpers/asResultOK.js</a>, <a href="src_test-helpers_asResultOK.js.html#line13">line 13</a>
+        <a href="src_test-helpers_asResultOK.js.html">src/test-helpers/asResultOK.js</a>, <a href="src_test-helpers_asResultOK.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -1036,6 +1089,11 @@ the &quot;success&quot; property of an object.</p>
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>asResultOK([1, 2, 3]) // => { success: [1, 2, 3] }</code></pre>
+
+
 
 
     <h5>Parameters:</h5>
@@ -1069,7 +1127,7 @@ the &quot;success&quot; property of an object.</p>
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">Any</span>
 
 
             
@@ -1142,7 +1200,7 @@ the &quot;success&quot; property of an object.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Tue Dec 14 2021 09:21:37 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Fri Dec 17 2021 10:28:42 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

@@ -179,7 +179,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_actions_createActionWithSource.js.html">src/actions/createActionWithSource.js</a>, <a href="src_actions_createActionWithSource.js.html#line16">line 16</a>
+        <a href="src_actions_createActionWithSource.js.html">src/actions/createActionWithSource.js</a>, <a href="src_actions_createActionWithSource.js.html#line30">line 30</a>
     </li></ul></dd>
     
 
@@ -233,6 +233,22 @@ put in the <code>sourceAction</code> property of the metadata.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const payload = [1, 2, 3];
+const sourceAction = { type: "SOURCE_ACTION" };
+const createSomeAction = createActionWithSource("SOME_ACTION");
+
+createSomeAction(payload, sourceAction) // =>
+// {
+//     meta: {
+//         sourceAction: { type: "SOURCE_ACTION" }
+//     },
+//     payload: [1, 2, 3],
+//     type: "SOME_ACTION"
+// }</code></pre>
 
 
 
@@ -304,7 +320,7 @@ put in the <code>sourceAction</code> property of the metadata.</p>
 
         
 <div class="param-desc">
-    <p>The action creator: <code>(*, <a href="global.html#Action">Action</a>?) =&gt; <a href="global.html#Action">Action</a></code></p>
+    <p>The action creator: <code>(Any, <a href="global.html#Action">Action</a>?) =&gt; <a href="global.html#Action">Action</a></code></p>
 </div>
 
 
@@ -342,7 +358,7 @@ put in the <code>sourceAction</code> property of the metadata.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_actions_createEmptyAction.js.html">src/actions/createEmptyAction.js</a>, <a href="src_actions_createEmptyAction.js.html#line14">line 14</a>
+        <a href="src_actions_createEmptyAction.js.html">src/actions/createEmptyAction.js</a>, <a href="src_actions_createEmptyAction.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -395,6 +411,13 @@ without any payload or metadata.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const createSomeAction = createEmptyAction("SOME_ACTION");
+
+createSomeAction([1, 2, 3]) // => { type: "SOME_ACTION" }</code></pre>
 
 
 
@@ -504,7 +527,7 @@ without any payload or metadata.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_actions_createHttpFailureAction.js.html">src/actions/createHttpFailureAction.js</a>, <a href="src_actions_createHttpFailureAction.js.html#line21">line 21</a>
+        <a href="src_actions_createHttpFailureAction.js.html">src/actions/createHttpFailureAction.js</a>, <a href="src_actions_createHttpFailureAction.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -562,6 +585,33 @@ will be an object with a single key <code>originalAction</code>.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const originalAction = { type: "ORIGINAL_ACTION" };
+const failure = new Error("some message");
+const createErrorAction = createHttpFailureAction("API_CALL_KO");
+
+createErrorAction(failure, originalAction) // =>
+// {
+//     error: true,
+//     meta: {
+//         originalAction: { type: "ORIGINAL_ACTION" }
+//     },
+//     payload: Error, // the "failure" error above
+//     type: "API_CALL_KO"
+// }
+
+createErrorAction(failure) // =>
+// {
+//     error: true,
+//     meta: {
+//         originalAction: undefined
+//     },
+//     payload: Error, // the "failure" error above
+//     type: "API_CALL_KO"
+// }</code></pre>
 
 
 
@@ -634,7 +684,7 @@ will be an object with a single key <code>originalAction</code>.</p>
         
 <div class="param-desc">
     <p>The action creator:
-<code>(payload: Error, originalAction: <a href="global.html#Action">Action</a>) =&gt; <a href="global.html#Action">Action</a></code></p>
+<code>(Error, <a href="global.html#Action">Action</a>?) =&gt; <a href="global.html#Action">Action</a></code></p>
 </div>
 
 
@@ -672,7 +722,7 @@ will be an object with a single key <code>originalAction</code>.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_actions_createHttpSuccessAction.js.html">src/actions/createHttpSuccessAction.js</a>, <a href="src_actions_createHttpSuccessAction.js.html#line16">line 16</a>
+        <a href="src_actions_createHttpSuccessAction.js.html">src/actions/createHttpSuccessAction.js</a>, <a href="src_actions_createHttpSuccessAction.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -728,6 +778,29 @@ and the original action in the <code>originalAction</code> one.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const originalAction = { type: "ORIGINAL_ACTION" };
+const response = {
+    body: [1, 2, 3],
+    status: 200
+};
+const createSuccessAction = createHttpSuccessAction("API_CALL_OK");
+
+createSuccessAction(response, originalAction) // =>
+// {
+//     meta: {
+//         originalAction: { type: "ORIGINAL_ACTION" },
+//         response: {
+//             body: [1, 2, 3],
+//             status: 200
+//         }
+//     },
+//     payload: [1, 2, 3],
+//     type: "API_CALL_OK"
+// }</code></pre>
 
 
 
@@ -799,7 +872,7 @@ and the original action in the <code>originalAction</code> one.</p>
 
         
 <div class="param-desc">
-    <p>The action creator: <code>Response =&gt; <a href="global.html#Action">Action</a></code></p>
+    <p>The action creator: <code>(Response, <a href="global.html#Action">Action</a>?) =&gt; <a href="global.html#Action">Action</a></code></p>
 </div>
 
 
@@ -837,7 +910,7 @@ and the original action in the <code>originalAction</code> one.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_actions_getPayloadAsArray.js.html">src/actions/getPayloadAsArray.js</a>, <a href="src_actions_getPayloadAsArray.js.html#line9">line 9</a>
+        <a href="src_actions_getPayloadAsArray.js.html">src/actions/getPayloadAsArray.js</a>, <a href="src_actions_getPayloadAsArray.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -890,6 +963,16 @@ in a one element array.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const action = {
+    payload: { value: 1 },
+    type: "SOME_TYPE"
+};
+
+getPayloadAsArray(action) => // [{ value : 1 }]</code></pre>
 
 
 
@@ -999,7 +1082,7 @@ in a one element array.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_actions_isHttpUnauthorizedAction.js.html">src/actions/isHttpUnauthorizedAction.js</a>, <a href="src_actions_isHttpUnauthorizedAction.js.html#line12">line 12</a>
+        <a href="src_actions_isHttpUnauthorizedAction.js.html">src/actions/isHttpUnauthorizedAction.js</a>, <a href="src_actions_isHttpUnauthorizedAction.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -1052,6 +1135,30 @@ an unauthorized HTTP error (401)</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const fake401Error = { status: 401 };
+const fake500Error = { status: 500 };
+const action1 = {
+    error: true,
+    payload: fake401Error,
+    type: "API_CALL_KO"
+};
+const action2 = {
+    payload: fake401Error,
+    type: "API_CALL_KO"
+};
+const action3 = {
+    error: true,
+    payload: fake500Error,
+    type: "API_CALL_KO"
+};
+
+isHttpUnauthorizedAction(action1) // => true
+isHttpUnauthorizedAction(action2) // => false
+isHttpUnauthorizedAction(action3) // => false</code></pre>
 
 
 
@@ -1160,7 +1267,7 @@ an unauthorized HTTP error (401)</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Tue Dec 14 2021 09:21:37 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Fri Dec 17 2021 10:28:42 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

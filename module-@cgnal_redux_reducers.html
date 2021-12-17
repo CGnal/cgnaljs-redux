@@ -179,7 +179,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_reducers_combine.js.html">src/reducers/combine.js</a>, <a href="src_reducers_combine.js.html#line12">line 12</a>
+        <a href="src_reducers_combine.js.html">src/reducers/combine.js</a>, <a href="src_reducers_combine.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -232,6 +232,20 @@ of a state, and combines them to produce a new state.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const state = {
+    counter: 0,
+    values: [1, 2]
+};
+const incrementCounter = state => ({ ...state, counter: state.counter + 1 });
+const addValue = (state, action) => ({ ...state, values: state.values.concat(action.payload) });
+const action = { payload: 3, type: "ADD_VALUE" };
+const combinedUpdate = combine([incrementCounter, addValue]);
+
+combinedUpdate(state, action) // => { counter: 1, values: [1, 2, 3] }</code></pre>
 
 
 
@@ -341,7 +355,7 @@ of a state, and combines them to produce a new state.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_reducers_handleHttpFailure.js.html">src/reducers/handleHttpFailure.js</a>, <a href="src_reducers_handleHttpFailure.js.html#line17">line 17</a>
+        <a href="src_reducers_handleHttpFailure.js.html">src/reducers/handleHttpFailure.js</a>, <a href="src_reducers_handleHttpFailure.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -387,7 +401,9 @@ of a state, and combines them to produce a new state.</p>
     <p>Utility function to handle a common case of change
 in the store when a HTTP requests completes successfully.
 Resets loading path to <code>false</code> and sets a data path with
-the HTTP result, optionally using a transformer function.</p>
+the HTTP result, optionally using a transformer function.<br/>
+Path strings are paths supplied to Lamb's <a href="https://ascartabelli.github.io/lamb/module-lamb.html#setPathIn">setPathIn</a>,
+implying that a dot is used as a separator (e.g. <code>&quot;view.isLoading&quot;</code>).</p>
 </div>
 
 
@@ -396,6 +412,36 @@ the HTTP result, optionally using a transformer function.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const state = {
+    data: [],
+    error: null,
+    isLoading: true
+};
+const action = {
+    error: true,
+    payload: new Error("some error"),
+    meta: {
+        originalAction: { type: "DATA_GET" }
+    },
+    type: "DATA_GET_KO"
+};
+const handler = handleHttpFailure(); // using default values
+
+handler(state, action) // =>
+// {
+//     data: [],
+//     error: {
+//         message: "Error during the HTTP request.",
+//         originalAction: { type: "DATA_GET" },
+//         originalError: Error, // the above action's payload
+//         title: "HTTP Error"
+//     },
+//     isLoading: false
+// }</code></pre>
 
 
 
@@ -642,7 +688,7 @@ the HTTP result, optionally using a transformer function.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_reducers_handleHttpStart.js.html">src/reducers/handleHttpStart.js</a>, <a href="src_reducers_handleHttpStart.js.html#line22">line 22</a>
+        <a href="src_reducers_handleHttpStart.js.html">src/reducers/handleHttpStart.js</a>, <a href="src_reducers_handleHttpStart.js.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -687,7 +733,9 @@ the HTTP result, optionally using a transformer function.</p>
 <div class="description usertext">
     <p>Utility function to handle a common case of change
 in the store when a HTTP requests starts.
-Resets an error path and set a loading path to <code>true</code>.</p>
+Resets an error path and set a loading path to <code>true</code>.<br/>
+Path strings are paths supplied to Lamb's <a href="https://ascartabelli.github.io/lamb/module-lamb.html#setPathIn">setPathIn</a>,
+implying that a dot is used as a separator (e.g. <code>&quot;view.isLoading&quot;</code>).</p>
 </div>
 
 
@@ -696,6 +744,29 @@ Resets an error path and set a loading path to <code>true</code>.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const state = {
+    data: [],
+    error: {
+        message: "Error during the HTTP request.",
+        originalAction: { type: "DATA_GET" },
+        originalError: new Error("some message")
+        title: "HTTP Error"
+    },
+    isLoading: false
+};
+const action = { type: "DATA_GET" };
+const handler = handleHttpStart(); // using default values
+
+// handler(state, action) // =>
+// {
+//     data: [],
+//     error: null,
+//     isLoading: true
+// }</code></pre>
 
 
 
@@ -864,7 +935,7 @@ Resets an error path and set a loading path to <code>true</code>.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_reducers_handleHttpSuccess.js.html">src/reducers/handleHttpSuccess.js</a>, <a href="src_reducers_handleHttpSuccess.js.html#line16">line 16</a>
+        <a href="src_reducers_handleHttpSuccess.js.html">src/reducers/handleHttpSuccess.js</a>, <a href="src_reducers_handleHttpSuccess.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -910,7 +981,9 @@ Resets an error path and set a loading path to <code>true</code>.</p>
     <p>Utility function to handle a common case of change
 in the store when a HTTP requests completes successfully.
 Resets loading path to <code>false</code> and sets a data path with
-the HTTP result, optionally using a transformer function.</p>
+the HTTP result, optionally using a transformer function.<br/>
+Path strings are paths supplied to Lamb's <a href="https://ascartabelli.github.io/lamb/module-lamb.html#setPathIn">setPathIn</a>,
+implying that a dot is used as a separator (e.g. <code>&quot;view.isLoading&quot;</code>).</p>
 </div>
 
 
@@ -919,6 +992,27 @@ the HTTP result, optionally using a transformer function.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const state = {
+    data: [],
+    error: null,
+    isLoading: true
+};
+const action = {
+    payload: [1, 2, 3],
+    type: "DATA_GET_OK"
+};
+const handler = handleHttpSuccess();  // using default values
+
+handler(state, action) // =>
+// {
+//     data: [1, 2, 3],
+//     error: null,
+//     isLoading: false
+// }</code></pre>
 
 
 
@@ -1062,7 +1156,7 @@ the HTTP result, optionally using a transformer function.</p>
                 </td>
             
 
-            <td class="description last"><p><code>(v:<em>, prevValue:</em>) =&gt; newValue:*</code></p></td>
+            <td class="description last"><p><code>(v:Any, prevValue:Any) =&gt; newValue:Any</code></p></td>
         </tr>
 
     
@@ -1126,7 +1220,7 @@ the HTTP result, optionally using a transformer function.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_reducers_putPayloadInKey.js.html">src/reducers/putPayloadInKey.js</a>, <a href="src_reducers_putPayloadInKey.js.html#line12">line 12</a>
+        <a href="src_reducers_putPayloadInKey.js.html">src/reducers/putPayloadInKey.js</a>, <a href="src_reducers_putPayloadInKey.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -1179,6 +1273,17 @@ payload in the given key of the redux state.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const state = {
+    data: []
+};
+const action = { payload: [1, 2, 3], type: "SET_DATA" };
+const handler = putPayloadInKey("data");
+
+handler(state, action) // => { data: [1, 2, 3] }</code></pre>
 
 
 
@@ -1288,7 +1393,7 @@ payload in the given key of the redux state.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_reducers_putPayloadInPath.js.html">src/reducers/putPayloadInPath.js</a>, <a href="src_reducers_putPayloadInPath.js.html#line13">line 13</a>
+        <a href="src_reducers_putPayloadInPath.js.html">src/reducers/putPayloadInPath.js</a>, <a href="src_reducers_putPayloadInPath.js.html#line25">line 25</a>
     </li></ul></dd>
     
 
@@ -1332,7 +1437,8 @@ payload in the given key of the redux state.</p>
 
 <div class="description usertext">
     <p>Builds a function that will put a <a href="https://github.com/acdlite/flux-standard-action">flux standard action</a>
-payload in the given path of the redux state.</p>
+payload in the given path of the redux state.<br/>
+Path strings are paths supplied to Lamb's <a href="https://ascartabelli.github.io/lamb/module-lamb.html#setPathIn">setPathIn</a>.</p>
 </div>
 
 
@@ -1341,6 +1447,19 @@ payload in the given path of the redux state.</p>
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const state = {
+    view: {
+        data: []
+    }
+};
+const action = { payload: [1, 2, 3], type: "SET_DATA" };
+const handler = putPayloadInPath("view.data");
+
+handler(state, action) // => { view: { data: [1, 2, 3] } }</code></pre>
 
 
 
@@ -1508,7 +1627,7 @@ payload in the given path of the redux state.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Tue Dec 14 2021 09:21:37 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Fri Dec 17 2021 10:28:42 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
