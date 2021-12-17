@@ -17,4 +17,20 @@ describe("createHttpSuccessAction", () => {
 
         expect(creator(fakeResponse, fakeOriginalAction)).toStrictEqual(successAction);
     });
+
+    it("should set an `undefined` original action property if the creator doesn't receive one", () => {
+        const fakeResponse = {
+            body: { a: 1 },
+            status: 200
+        };
+        const successAction = {
+            meta: { originalAction: void 0, response: fakeResponse },
+            payload: fakeResponse.body,
+            type: "SOME_SUCCESS_TYPE"
+        };
+
+        const creator = createHttpSuccessAction(successAction.type);
+
+        expect(creator(fakeResponse)).toStrictEqual(successAction);
+    });
 });

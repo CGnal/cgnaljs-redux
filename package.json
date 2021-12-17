@@ -49,10 +49,10 @@
         "test": "gulp test"
     },
     "sideEffects": false,
-    "version": "0.1.1-beta.1",
+    "version": "0.1.1-beta.2",
     "dependencies": {
         "@babel/runtime-corejs3": "^7.16.5",
-        "@cgnal/utils": "^0.1.4",
+        "@cgnal/utils": "^0.1.5",
         "core-js": "^3.19.3",
         "lamb": "^0.60.0",
         "redux-actions": "^2.6.5",
@@ -66,7 +66,7 @@
         "del": "^6.0.0",
         "docdash": "^1.2.0",
         "eslint-plugin-import": "^2.25.3",
-        "eslint-plugin-jsdoc": "^37.2.0",
+        "eslint-plugin-jsdoc": "^37.2.3",
         "gulp": "^4.0.2",
         "gulp-eslint-new": "^1.1.0",
         "gulp-jest": "^4.0.4",

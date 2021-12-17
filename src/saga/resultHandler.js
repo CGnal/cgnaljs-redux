@@ -5,7 +5,7 @@ import { all, put } from "redux-saga/effects";
  * @private
  * @function
  * @param {Object} result
- * @param {*} [result.success]
+ * @param {Any} [result.success]
  * @param {Error} [result.error]
  * @param {Function[]} successCreators
  * @param {Function[]} failureCreators
@@ -19,15 +19,15 @@ const getResult = ({ success, error }, successCreators, failureCreators) => [
 /**
  * @private
  * @function
- * @param {*} result
+ * @param {Any} result
  * @param {Action} action
  * @returns {Function} <code>actionCreator:{@link Function} => putEffect:{@link Object}</code>
  */
 const toPutEffect = (result, action) => actionCreator => put(actionCreator(result, action));
 
 /**
- * Builds a generator function that will perform the given call effect maker and will yield
- * all the put effects created from <code>successCreators</code> if the call effect
+ * Builds a generator function that will perform the call effect built by the given maker function.<br/>
+ * It will yield all the put effects created from <code>successCreators</code> if the call effect
  * is successful or from <code>failureCreators</code> otherwise.
  * @memberof module:@cgnal/redux/saga
  * @since 0.0.12

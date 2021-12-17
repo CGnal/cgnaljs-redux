@@ -13,6 +13,7 @@ module.exports = {
         "import/resolver": "@tophat/eslint-import-resolver-require",
         "jsdoc": {
             "preferredTypes": {
+                "*": "Any",
                 "array": "Array",
                 "boolean": "Boolean",
                 "date": "Date",
@@ -49,6 +50,7 @@ module.exports = {
             "error", {
                 "definedTypes": [
                     "Action",
+                    "Any",
                     "GeneratorFunction"
                 ]
             }

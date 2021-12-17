@@ -11,12 +11,37 @@ import { putInKey } from "@cgnal/utils/object";
  * second parameter.<br/>
  * The resulting action will have an additional <code>meta</code> property, which
  * will be an object with a single key <code>originalAction</code>.
+ * @example
+ * const originalAction = { type: "ORIGINAL_ACTION" };
+ * const failure = new Error("some message");
+ * const createErrorAction = createHttpFailureAction("API_CALL_KO");
+ *
+ * createErrorAction(failure, originalAction) // =>
+ * // {
+ * //     error: true,
+ * //     meta: {
+ * //         originalAction: { type: "ORIGINAL_ACTION" }
+ * //     },
+ * //     payload: Error, // the "failure" error above
+ * //     type: "API_CALL_KO"
+ * // }
+ *
+ * createErrorAction(failure) // =>
+ * // {
+ * //     error: true,
+ * //     meta: {
+ * //         originalAction: undefined
+ * //     },
+ * //     payload: Error, // the "failure" error above
+ * //     type: "API_CALL_KO"
+ * // }
+ *
  * @memberof module:@cgnal/redux/actions
  * @since 0.0.1
  * @function
  * @param {String} type The action type
  * @returns {Function} The action creator:
- * <code>(payload: Error, originalAction: {@link Action}) => {@link Action}</code>
+ * <code>(Error, {@link Action}?) => {@link Action}</code>
  */
 const createHttpFailureAction = type => createAction(
     type,

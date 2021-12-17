@@ -2,8 +2,8 @@ import { call } from "redux-saga/effects";
 
 /**
  * Helper to build a [redux-saga call effect]{@link https://redux-saga.js.org/docs/api/#callcontext-fn-args}.<br/>
- * Expects the function to call, and a second function, that will receive the involved action as argument,
- * that should return the array of parameters for the first one.
+ * Expects the function to call, and a second function, that will receive the involved action as argument
+ * and should return the array of parameters for the first one.
  * @memberof module:@cgnal/redux/saga
  * @since 0.0.12
  * @function
